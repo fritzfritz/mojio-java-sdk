@@ -200,6 +200,9 @@ public interface MojioRestApi {
     @POST("mojios")
     Call<Mojio> claimMojio(@Body Mojio mojio);
 
+    @POST("mojios")
+    Call<Mojio> partialClaimMojio(@Body Mojio mojio, @Query("permissions") String[] permissions, @Query("groupId") String groupId);
+
     @PUT("mojios/{id}")
     Call<Mojio> updateMojio(@Body Mojio mojio);
 

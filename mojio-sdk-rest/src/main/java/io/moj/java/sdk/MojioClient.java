@@ -136,6 +136,19 @@ public class MojioClient {
         return new LoginCall(username, password, client);
     }
 
+
+    /**
+     * Authenticates a user for a given scope, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param username
+     * @param password
+     * @param scope the scope
+     * @return
+     */
+    public Call<User> login(String username, String password, String scope) {
+        return new LoginCall(username, password, false,  client,  scope);
+    }
+
     /**
      * Authenticates a user, stores the access token in the client's configured
      * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
@@ -405,6 +418,10 @@ public class MojioClient {
         }
 
         public LoginCall(String id, String password, boolean usingPin, Client client) {
+            this(id,password,usingPin,client,"full");
+        }
+
+        public LoginCall(String id, String password, boolean usingPin, Client client, String scope) {
             this.id = id;
             this.password = password;
             this.usingPin = usingPin;
@@ -412,8 +429,10 @@ public class MojioClient {
 
             this.authCall = usingPin
                     ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret());
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), scope);
         }
+
+
 
         @Override
         public Response<User> execute() throws IOException {
