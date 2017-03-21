@@ -407,6 +407,8 @@ public interface MojioRestApi {
     @POST("admin/tenants")
     Call<Tenant> createTenant(@Body Tenant tenant);
 
+    @POST("admin/tenants/{id}/mojios")
+    Call<MojioBulk> claimMojioBulk(@Path("id") String tenantId, @Body MojioBulk mojioBulk);
 
     // endregion
 
