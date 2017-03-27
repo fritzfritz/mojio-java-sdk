@@ -2,15 +2,7 @@ package io.moj.java.sdk;
 
 import java.util.Map;
 
-import io.moj.java.sdk.model.App;
-import io.moj.java.sdk.model.Geofence;
-import io.moj.java.sdk.model.Group;
-import io.moj.java.sdk.model.Mojio;
-import io.moj.java.sdk.model.Transaction;
-import io.moj.java.sdk.model.Trip;
-import io.moj.java.sdk.model.User;
-import io.moj.java.sdk.model.Vehicle;
-import io.moj.java.sdk.model.VehicleMeasure;
+import io.moj.java.sdk.model.*;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.response.TransactionResponse;
@@ -199,6 +191,9 @@ public interface MojioRestApi {
 
     @POST("mojios")
     Call<Mojio> claimMojio(@Body Mojio mojio);
+
+    @POST("mojios")
+    Call<Mojio> partialClaimMojio(@Body Mojio mojio, @Query("permissions") String[] permissions, @Query("groupId") String groupId);
 
     @PUT("mojios/{id}")
     Call<Mojio> updateMojio(@Body Mojio mojio);
@@ -406,6 +401,18 @@ public interface MojioRestApi {
 
     @GET("vehicles/{id}/statistics")
     Call<VehicleStatistics> getStatistics(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+    // endregion
+
+    //Tenant Region
+    @POST("admin/tenants")
+    Call<Tenant> createTenant(@Body Tenant tenant);
+
+    @PUT("admin/tenants/{id}/")
+    Call<Tenant> updateTenant(@Path("id") String tenantId, @Body Tenant tenant);
+
+    @POST("admin/tenants/{id}/mojios")
+    Call<MojioBulk> claimMojioBulk(@Path("id") String tenantId, @Body MojioBulk mojioBulk);
+
     // endregion
 
 }

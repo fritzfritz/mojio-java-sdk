@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
 
 ext {
     PUBLISH_GROUP_ID = 'io.moj.java'

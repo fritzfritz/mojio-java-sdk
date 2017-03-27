@@ -37,6 +37,7 @@ install {
     }
 }
 
+/*
 uploadArchives() {
     description = "Uploads all Maven artifacts to BinTray"
     group = "Maven"
@@ -57,7 +58,7 @@ uploadArchives() {
         }
     }
 }
-
+*/
 task generateRelease(type: Zip, group: 'Maven') {
     description = "Generates a .zip file containing jars and poms for hosting on a Maven repo"
 
