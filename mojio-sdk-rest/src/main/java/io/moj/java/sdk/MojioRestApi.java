@@ -413,6 +413,9 @@ public interface MojioRestApi {
     @POST("admin/tenants/{id}/mojios")
     Call<MojioBulk> claimMojioBulk(@Path("id") String tenantId, @Body MojioBulk mojioBulk);
 
+    @GET("admin/tenants/{id}/")
+    Call<Tenant> getTenant(@Path("id") String tenantId);
+
     // endregion
 
     // ExternalIdentityProvider
