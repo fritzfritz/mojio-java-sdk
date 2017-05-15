@@ -415,4 +415,17 @@ public interface MojioRestApi {
 
     // endregion
 
+    // ExternalIdentityProvider
+
+    @POST("admin/oauth/providers")
+    Call<OAuthProvider> createOAuthProvider(@Body OAuthProvider oAuthProvider);
+
+    @GET("admin/oauth/providers/{providerName}")
+    Call<ListResponse<OAuthProvider>> getAllOAuthprovider(@Path("providerName") String providerName);
+
+    @GET("admin/oauth/providers")
+    Call<ListResponse<OAuthProvider>> getAllOAuthprovider();
+
+
+
 }
